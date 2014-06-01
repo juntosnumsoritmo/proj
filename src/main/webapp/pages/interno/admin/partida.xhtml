@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templates/template-cadastro.xhtml">
+
+    <ui:define name="conteudo">
+        <p:growl id="messages" />
+
+        <p:dialog id="dialogPartida" widgetVar="dialog" header="#{i18n['partida.cadastro.titulo']}" 
+                  dynamic="true" closable="false" resizable="false" closeOnEscape="true" draggable="false" 
+                  showEffect="fade" hideEffect="fade" modal="true">
+            <h:form id="dialog-cadastro-form">
+                <p:blockUI block="panel-dialog-partida" trigger="btnDialogAdicionar" />
+
+                <h:inputHidden id="id" rendered="#{partidaControle.entidade.id != null}" value="#{partidaControle.entidade.id}" />
+
+                <p:panelGrid id="panel-dialog-partida" columns="2" style="width: 100%;">
+                    <p:outputLabel for="dataHora" value="#{i18n['partida.dataHora']}" />
+                    <p:calendar id="dataHora" value="#{partidaControle.entidade.dataHora}"
+                                disabled="#{not empty partidaControle.entidade.placar}"
+                                required="true" pattern="dd/MM/yyyy HH:mm" showOn="button" />
+
+                    <p:outputLabel for="primeiraSelecao" value="#{i18n['partida.primeiraSelecao']}" />
+                    <p:selectOneMenu id="primeiraSelecao" value="#{partidaControle.entidade.primeiraSelecao}"
+                                     required="true" filter="true" converter="selectConverter"
+                                     filterMatchMode="contains" disabled="#{not empty partidaControle.entidade.placar}">
+                        <f:selectItem itemLabel="#{i18n['label.selecione']}" />
+                        <f:selectItems value="#{partidaControle.selecaoList}" var="selecao" itemValue="#{selecao}" itemLabel="#{selecao.nome}"  />
+                    </p:selectOneMenu>
+
+                    <p:outputLabel for="segundaSelecao" value="#{i18n['partida.segundaSelecao']}" />
+                    <p:selectOneMenu id="segundaSelecao" value="#{partidaControle.entidade.segundaSelecao}"
+                                     required="true" filter="true" converter="selectConverter"
+                                     filterMatchMode="contains" disabled="#{not empty partidaControle.entidade.placar}">
+                        <f:selectItem itemLabel="#{i18n['label.selecione']}" />
+                        <f:selectItems value="#{partidaControle.selecaoList}" var="selecao" itemValue="#{selecao}" itemLabel="#{selecao.nome}"  />
+                    </p:selectOneMenu>
+
+                    <p:outputLabel rendered="#{partidaControle.entidade.id != null}" value="#{i18n['partida.placar']}" />
+                    <p:outputLabel rendered="#{partidaControle.entidade.id != null}" value="#{partidaControle.entidade.placar}" />
+
+                    <f:facet name="footer">  
+                        <p:commandButton id="btnDialogAdicionar" widgetVar="btnAdicionar" value="#{i18n['label.salvar']}"
+                                         rendered="#{empty partidaControle.entidade.placar}"
+                                         onclick="btnAdicionar.disable();" oncomplete="btnAdicionar.enable(); handleRequest(xhr, status, args, 'dialog')" 
+                                         update="dialog-cadastro-form, :pesquisa-form, :messages"
+                                         icon="ui-icon-check" action="#{partidaControle.salvarOuAtualizar}"/>
+
+                        <p:commandButton id="btnDialogGerar" widgetVar="btnGerar" value="#{i18n['partida.gerar.placar']}"
+                                         rendered="#{partidaControle.gerarPlacar}"
+                                         onclick="btnGerar.disable();" oncomplete="btnGerar.enable();" 
+                                         update="dialog-cadastro-form, :pesquisa-form, :messages"
+                                         icon="ui-icon-lightbulb" action="#{partidaControle.gerarResultado}"/>
+
+                        <p:commandButton  id="btnDialogCancelar" value="#{i18n['label.voltar']}" 
+                                          oncomplete="PF('dialog').hide();" process="@this" 
+                                          update="dialog-cadastro-form, :messages" 
+                                          icon="ui-icon-circle-arrow-w">
+                            <p:resetInput target="panel-dialog-partida" />
+                        </p:commandButton>
+                    </f:facet>  
+                </p:panelGrid>
+            </h:form>
+        </p:dialog>
+
+        <h:form id="pesquisa-form">
+            <p:blockUI block="panel-cadastro" trigger="btnListar" />
+
+            <p:panelGrid id="panel-cadastro" columns="2" style="width: 100%;">
+                <f:facet name="header">  
+                    <p:outputLabel value="#{i18n['partida.cadastro.titulo']}" />
+                </f:facet> 
+
+                <p:outputLabel for="dataInicial" value="#{i18n['partida.periodo']}" />
+                <h:panelGroup>
+                    <p:calendar id="dataInicial" value="#{partidaControle.filtro.dataInicial}" pattern="dd/MM/yyyy" showOn="button"  />
+
+                    <p:outputLabel for="dataFinal" value="#{i18n['label.ate']}" />
+
+                    <p:calendar id="dataFinal" value="#{partidaControle.filtro.dataFinal}" pattern="dd/MM/yyyy" showOn="button"  />
+                </h:panelGroup>
+
+                <p:outputLabel for="nomeSelecao" value="#{i18n['partida.nome.selecao']}" />
+                <p:inputText id="nomeSelecao" value="#{partidaControle.filtro.nomeSelecao}" autocomplete="false" />
+
+                <f:facet name="footer">  
+                    <p:commandButton id="btnListar" value="#{i18n['label.listar']}" update="dataTable" action="#{partidaControle.listar}" icon="ui-icon-search" />
+
+                    <p:commandButton id="bntNovo" value="#{i18n['label.novo']}" update=":dialog-cadastro-form, :messages" 
+                                     action="#{partidaControle.preSalvar}" icon="ui-icon-document" oncomplete="PF('dialog').show();" />
+
+                    <p:button id="btnVoltar" value="#{i18n['label.voltar']}" outcome="/pages/interno/inicial" icon="ui-icon-circle-arrow-w" />
+                </f:facet>  
+            </p:panelGrid>
+
+            <br />
+
+            <p:dataTable id="dataTable" var="partida" value="#{partidaControle.entidadeList}"
+                         paginator="true" rows="4" emptyMessage="#{i18n['msg.nenhum.registro']}" 
+                         paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="4,8,12">
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{i18n['partida.dataHora']}" />
+                    </f:facet>
+                    <h:outputText value="#{partida.dataHora}">
+                        <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+                    </h:outputText>
+                </p:column>
+
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{i18n['partida.primeiraSelecao']}" />
+                    </f:facet>
+                    <h:outputText value="#{partida.primeiraSelecao.nome}" />
+                </p:column>
+
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{i18n['partida.segundaSelecao']}" />
+                    </f:facet>
+                    <h:outputText value="#{partida.segundaSelecao.nome}" />
+                </p:column>
+
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{i18n['partida.placar']}" />
+                    </f:facet>
+                    <h:outputText value="#{partida.placar}" />
+                </p:column>
+
+                <p:column width="4%">
+                    <p:commandButton id="btnAtualizarApostador" update=":dialog-cadastro-form, :messages" 
+                                     action="#{partidaControle.preAtualizar}" oncomplete="PF('dialog').show();"
+                                     icon="ui-icon-search">
+                        <f:setPropertyActionListener value="#{partida}" target="#{partidaControle.entidade}" />
+                    </p:commandButton>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

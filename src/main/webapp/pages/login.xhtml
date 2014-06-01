@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <title><h:outputText value="#{i18n['titulo.sistema']}" /></title>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+        <link rel="stylesheet" href="#{request.contextPath}/css/principal.css" type="text/css" media="all" charset="UTF-8" />
+    </h:head>
+
+    <h:body>
+        <div class="conteudo">
+            <h:graphicImage value="/images/login.jpg" />
+
+            <h:form id="login-form">
+                <p:growl id="messages" />
+                <p:blockUI block="panelLogin" trigger="btnLogin" />
+
+                <p:panelGrid id="panelLogin" columns="2" style="width: 100%;">
+                    <p:outputLabel for="login" value="#{i18n['apostador.login']}" />
+                    <p:inputText id="login" value="#{loginControle.usuario.login}" required="true" autocomplete="false" />
+
+                    <p:outputLabel for="senha" value="#{i18n['apostador.senha']}" />
+                    <p:password id="senha" value="#{loginControle.usuario.senha}" required="true" autocomplete="false" />
+
+                    <f:facet name="footer">  
+                        <p:commandButton id="btnLogin" value="#{i18n['label.login']}" update="login-form" icon="ui-icon-person" action="#{loginControle.login}"/>
+
+                        <h:link value="${i18n['msg.nao.possui.cadastro']}" style="float: right; padding: 5px;" outcome="/pages/apostador" />
+                    </f:facet>  
+                </p:panelGrid>
+            </h:form>
+        </div>
+    </h:body>
+
+</html>

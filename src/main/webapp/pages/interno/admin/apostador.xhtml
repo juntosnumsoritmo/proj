@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"  
+                template="/WEB-INF/templates/template-cadastro.xhtml">
+
+    <ui:define name="conteudo">
+        <p:growl id="messages"  />
+        
+        <p:dialog id="dialogApostador" widgetVar="dialog" header="#{i18n['apostador.cadastro.titulo']}" 
+                  dynamic="true" closable="false" resizable="false" closeOnEscape="true" draggable="false" 
+                  showEffect="fade" hideEffect="fade" modal="true">
+            <h:form id="dialog-cadastro-form">
+                <p:blockUI block="panel-dialog-apostador" trigger="btnDialogAdicionar" />
+                
+                <h:inputHidden id="id" rendered="#{apostadorControle.entidade.id != null}" value="#{apostadorControle.entidade.id}" />
+
+                <p:panelGrid id="panel-dialog-apostador" columns="2" style="width: 100%;">
+                    <p:outputLabel for="nome" value="#{i18n['apostador.nome']}" />
+                    <p:inputText id="nome" value="#{apostadorControle.entidade.nome}" required="true" autocomplete="false" />
+
+                    <p:outputLabel for="login" value="#{i18n['apostador.login']}" />
+                    <p:inputText id="login" value="#{apostadorControle.entidade.login}" required="true" autocomplete="false" />
+
+                    <p:outputLabel for="senha" value="#{i18n['apostador.senha']}" />
+                    <p:password id="senha" value="#{apostadorControle.entidade.senha}" required="#{apostadorControle.entidade.id == null}" autocomplete="false" />
+
+                    <p:outputLabel for="isAdmin" rendered="#{sessionScope['usuario-logado'].admin}" value="#{i18n['apostador.admin']}"/>
+                    <p:selectBooleanButton id="isAdmin" rendered="#{sessionScope['usuario-logado'].admin}" 
+                                           value="#{apostadorControle.entidade.admin}" 
+                                           onLabel="#{i18n['label.sim']}" offLabel="#{i18n['label.nao']}" 
+                                           onIcon="ui-icon-check" offIcon="ui-icon-close" />  
+
+                    <p:outputLabel for="pontos" value="#{i18n['apostador.pontos']}" />
+                    <p:inputText id="pontos" value="#{apostadorControle.entidade.pontos}" autocomplete="false" />
+
+                    <f:facet name="footer">  
+                        <p:commandButton id="btnDialogAdicionar" widgetVar="btnAdicionar" value="#{i18n['label.salvar']}"
+                                         onclick="btnAdicionar.disable();" oncomplete="btnAdicionar.enable(); handleRequest(xhr, status, args, 'dialog')" 
+                                         update="dialog-cadastro-form, :pesquisa-form, :messages"
+                                         icon="ui-icon-check" action="#{apostadorControle.salvarOuAtualizar}"/>
+
+                        <p:commandButton  id="btnDialogCancelar" value="#{i18n['label.voltar']}" 
+                                          oncomplete="PF('dialog').hide();" process="@this" 
+                                          update="dialog-cadastro-form, :messages" 
+                                          icon="ui-icon-circle-arrow-w">
+                            <p:resetInput target="panel-dialog-apostador" />
+                        </p:commandButton>
+                    </f:facet>  
+                </p:panelGrid>
+            </h:form>
+        </p:dialog>
+
+        <h:form id="pesquisa-form">
+            <p:blockUI block="panel-cadastro" trigger="btnListar" />
+
+            <p:panelGrid id="panel-cadastro" columns="2" style="width: 100%;">
+                <f:facet name="header">  
+                    <p:outputLabel value="#{i18n['apostador.cadastro.titulo']}" />
+                </f:facet> 
+
+                <p:outputLabel for="nome" value="#{i18n['apostador.nome']}" />
+                <p:inputText id="nome" value="#{apostadorControle.filtro.nome}" autocomplete="false" />
+
+                <p:outputLabel for="login" value="#{i18n['apostador.login']}" />
+                <p:inputText id="login" value="#{apostadorControle.filtro.login}" autocomplete="false" />
+
+                <f:facet name="footer">  
+                    <p:commandButton id="btnListar" value="#{i18n['label.listar']}" update="dataTable" action="#{apostadorControle.listar}" icon="ui-icon-search" />
+
+                    <p:commandButton id="bntNovo" value="#{i18n['label.novo']}" update=":dialog-cadastro-form, :messages" 
+                                     action="#{apostadorControle.preSalvar}" icon="ui-icon-document" oncomplete="PF('dialog').show();" />
+
+                    <p:button id="btnVoltar" value="#{i18n['label.voltar']}" outcome="/pages/interno/inicial" icon="ui-icon-circle-arrow-w" />
+                </f:facet>  
+            </p:panelGrid>
+
+            <br />
+
+            <p:dataTable id="dataTable" var="apostador" value="#{apostadorControle.entidadeList}"
+                         paginator="true" rows="4" emptyMessage="#{i18n['msg.nenhum.registro']}" 
+                         paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="4,8,12">
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{i18n['apostador.nome']}" />
+                    </f:facet>
+                    <h:outputText value="#{apostador.nome}" />
+                </p:column>
+
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{i18n['apostador.login']}" />
+                    </f:facet>
+                    <h:outputText value="#{apostador.login}" />
+                </p:column>
+
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{i18n['apostador.pontos']}" />
+                    </f:facet>
+                    <h:outputText value="#{apostador.pontos}" />
+                </p:column>
+
+                <p:column width="4%">
+                    <p:commandButton id="btnAtualizarApostador" update=":dialog-cadastro-form, :messages" 
+                                     action="#{apostadorControle.preAtualizar}" oncomplete="PF('dialog').show();"
+                                     icon="ui-icon-search">
+                        <f:setPropertyActionListener value="#{apostador}" target="#{apostadorControle.entidade}" />
+                    </p:commandButton>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

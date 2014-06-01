@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templates/template-cadastro.xhtml">
+
+    <ui:define name="conteudo">
+        <h:form id="cadastro-form">
+            <p:growl id="messages" />
+            <p:blockUI block="panelApostador" trigger="btnAdicionar" />
+
+            <p:panelGrid id="panelApostador" columns="2" style="width: 100%;">
+                <f:facet name="header">  
+                    <p:outputLabel value="#{i18n['apostador.cadastro.titulo']}" />
+                </f:facet> 
+
+                <p:outputLabel for="nome" value="#{i18n['apostador.nome']}" />
+                <p:inputText id="nome" value="#{loginControle.usuario.nome}" required="true" autocomplete="false" />
+
+                <p:outputLabel for="login" value="#{i18n['apostador.login']}" />
+                <p:inputText id="login" value="#{loginControle.usuario.login}" required="true" autocomplete="false" />
+
+                <p:outputLabel for="senha" value="#{i18n['apostador.senha']}" />
+                <p:password id="senha" value="#{loginControle.usuario.senha}" required="true" autocomplete="false" />
+
+                <f:facet name="footer">  
+                    <p:commandButton id="btnAdicionar" value="#{i18n['label.adicionar']}" update="cadastro-form" icon="ui-icon-check" action="#{loginControle.salvarNovoUsuario}"/>
+                    <p:button id="btnVoltar" value="#{i18n['label.voltar']}" outcome="/pages/interno/inicial" icon="ui-icon-circle-arrow-w" />
+                </f:facet>  
+            </p:panelGrid>
+        </h:form>
+    </ui:define>
+
+</ui:composition>
