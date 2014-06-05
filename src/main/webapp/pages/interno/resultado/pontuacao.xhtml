@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
+                template="/WEB-INF/templates/template-principal.xhtml">
+
+    <ui:define name="conteudo">
+        <div class="conteudo_cadastro">
+            <p:growl id="messages" />
+            
+            <h:form id="pontuacao-form">
+                <p:blockUI block="panel-pontuacao" trigger="btnListar" />
+
+                <p:panel id="panel-pontuacao" header="#{i18n['menu.pontuacao']}" style="width: 100%;">
+                    <h:panelGrid style="width: 100%; text-align: center;">
+                        <p:panelGrid columns="2" style="width: 100%;">
+                            <p:outputLabel for="dataInicial" value="#{i18n['pontuacao.periodo']}" />
+                            <h:panelGroup>
+                                <p:calendar id="dataInicial" value="#{pontuacaoControle.partida.dataInicial}" pattern="dd/MM/yyyy" showOn="button"  />
+
+                                <p:outputLabel for="dataFinal" value="#{i18n['label.ate']}" />
+
+                                <p:calendar id="dataFinal" value="#{pontuacaoControle.partida.dataFinal}" pattern="dd/MM/yyyy" showOn="button"  />
+                            </h:panelGroup>
+
+                            <f:facet name="footer">  
+                                <p:commandButton id="btnListar" value="#{i18n['label.listar']}" update="panelChart, :messages" action="#{pontuacaoControle.gerarPontuacao}" icon="ui-icon-search" />
+
+                                <p:button id="btnVoltar" value="#{i18n['label.voltar']}" outcome="/pages/interno/inicial" icon="ui-icon-circle-arrow-w" />
+                            </f:facet> 
+                        </p:panelGrid>
+
+                        <br />
+
+                        <h:panelGrid id="panelChart" width="100%">
+                            <p:outputLabel value="#{i18n['msg.nenhum.registro']}" rendered="#{empty pontuacaoControle.pontuacaoChart.series}" />
+
+                            <p:barChart id="pontuacaoChart" datatipFormat="%1$d" title="#{i18n['pontuacao.titulo']}"
+                                        rendered="#{not empty pontuacaoControle.pontuacaoChart.series}" 
+                                        value="#{pontuacaoControle.pontuacaoChart}" 
+                                        style="background-color: wheat;"
+                                        legendPosition="se"
+                                        orientation="horizontal" />
+                        </h:panelGrid>
+
+                    </h:panelGrid>
+                </p:panel>
+            </h:form>
+        </div>
+    </ui:define>
+
+</ui:composition>
