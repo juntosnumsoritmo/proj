@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <title><h:outputText value="#{i18n['titulo.sistema']}" /></title>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+        <link rel="stylesheet" href="#{request.contextPath}/css/principal.css" type="text/css" media="all" charset="UTF-8" />
+
+        <script src="#{request.contextPath}/js/focus.js" />
+    </h:head>
+
+    <h:body>
+        <div class="conteudo_cadastro">
+            <h:graphicImage value="/images/cadastro.jpg" />
+
+            <h:form id="cadastro-form">
+                <p:growl id="messages" />
+                <p:blockUI block="panelApostador" trigger="btnAdicionar" />
+
+                <p:panelGrid id="panelApostador" columns="2" style="width: 100%;">
+                    <f:facet name="header">  
+                        <p:outputLabel value="#{i18n['apostador.cadastro.titulo']}" />
+                    </f:facet> 
+
+                    <p:outputLabel for="nome" value="#{i18n['apostador.nome']}" />
+                    <p:inputText id="nome" value="#{loginControle.usuario.nome}" required="true" autocomplete="false" />
+
+                    <p:outputLabel for="login" value="#{i18n['apostador.login']}" />
+                    <p:inputText id="login" value="#{loginControle.usuario.login}" required="true" autocomplete="false" />
+
+                    <p:outputLabel for="senha" value="#{i18n['apostador.senha']}" />
+                    <p:password id="senha" value="#{loginControle.usuario.senha}" required="true" autocomplete="false" />
+
+                    <f:facet name="footer">  
+                        <p:commandButton id="btnAdicionar" value="#{i18n['label.adicionar']}" update="cadastro-form" icon="ui-icon-check" action="#{loginControle.salvarNovoUsuario}"/>
+                        <p:button id="btnVoltar" value="#{i18n['label.voltar']}" outcome="/pages/interno/inicial" icon="ui-icon-circle-arrow-w" />
+                    </f:facet>  
+                </p:panelGrid>
+            </h:form>
+        </div>
+    </h:body>
+
+</html>
+

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templates/template-principal.xhtml">
+
+    <ui:define name="conteudo">
+
+        <div class="conteudo_cadastro">
+            <p:growl id="messages" />
+
+            <p:dialog id="dialogEscalacao" widgetVar="dialog" header="#{i18n['partida.comentarios']}" 
+                      dynamic="true" closable="false" resizable="false" closeOnEscape="true" draggable="false" 
+                      showEffect="fade" hideEffect="fade" modal="true">
+                <h:form id="dialog-escalacao-form">
+                    <p:blockUI block="dialog-escalacao-form" trigger="btnDialogSalvar" />
+
+                    <h:panelGrid columns="2" width="100%">
+                        <p:outputLabel for="partida" style="float: right" value="#{i18n['apostador.escalacao.partida']}" />
+
+                        <h:outputText rendered="#{apostadorEscalacaoControle.entidade.id != null}" value="#{apostadorEscalacaoControle.entidade.partida.descricao}" />
+                        <p:selectOneMenu id="partida" value="#{apostadorEscalacaoControle.entidade.partida}" rendered="#{apostadorEscalacaoControle.entidade.id == null}" required="true" converter="selectConverter" style="width: 100%;">
+                            <p:ajax update="@this, :dialogEscalacao" oncomplete="PF('dialog').show();" listener="#{apostadorEscalacaoControle.carregarAtletas}" />
+
+                            <f:selectItems value="#{apostadorEscalacaoControle.partidaList}" var="partida" itemValue="#{partida}" itemLabel="#{partida.descricao}"  />
+                        </p:selectOneMenu>
+
+                        <p:outputLabel for="nome" value="#{i18n['apostador.escalacao.nome']}" style="float: right" />
+
+                        <p:inputText id="nome" value="#{apostadorEscalacaoControle.entidade.nome}" disabled="#{not empty apostadorEscalacaoControle.entidade.partida.placar}" required="true" autocomplete="false" />
+                    </h:panelGrid>
+
+                    <p:separator style="width: 100%;" />
+
+                    <h:panelGrid id="panel-atletas" columns="2" rendered="#{apostadorEscalacaoControle.entidade.partida.id != null}" width="100%" columnClasses="topo,topo">
+                        <p:fieldset legend="#{apostadorEscalacaoControle.entidade.partida.primeiraSelecao.nome}">
+                            <p:selectManyCheckbox id="atletasPrimeiraSelecao" value="#{apostadorEscalacaoControle.atletaPrimeraSelecaoSelecionadoList}" disabled="#{not empty apostadorEscalacaoControle.entidade.partida.placar}" layout="grid" columns="2">
+                                <f:selectItems value="#{apostadorEscalacaoControle.atletaPrimeiraSelecaoList}" var="atleta" itemLabel="#{atleta.nome}" itemValue="#{atleta.id}" />
+                            </p:selectManyCheckbox>
+                        </p:fieldset>
+
+                        <p:fieldset legend="#{apostadorEscalacaoControle.entidade.partida.segundaSelecao.nome}">
+                            <p:selectManyCheckbox id="grid" value="#{apostadorEscalacaoControle.atletaSegundaSelecaoSelecionadoList}" disabled="#{not empty apostadorEscalacaoControle.entidade.partida.placar}" layout="grid" columns="2">
+                                <f:selectItems value="#{apostadorEscalacaoControle.atletaSegundaSelecaoList}" var="atleta" itemLabel="#{atleta.nome}" itemValue="#{atleta.id}" />
+                            </p:selectManyCheckbox>
+                        </p:fieldset>
+                    </h:panelGrid>
+
+                    <br />
+
+                    <h:panelGrid columns="2" id="panel-dialog-comentario" style="float: right; text-align: right;">
+                        <p:commandButton id="btnDialogSalvar" widgetVar="btnAdicionar" value="#{i18n['label.salvar']}"
+                                         rendered="#{empty apostadorEscalacaoControle.entidade.partida.placar}"
+                                         onclick="btnAdicionar.disable();" oncomplete="btnAdicionar.enable(); handleRequest(xhr, status, args, 'dialog');" 
+                                         update="dialog-escalacao-form, :messages, :form-escalacao:dataTable" style="float: right;"
+                                         icon="ui-icon-check" action="#{apostadorEscalacaoControle.salvarOuAtualizar}"/>
+
+                        <p:commandButton  id="btnDialogCancelar" value="#{i18n['label.voltar']}" 
+                                          oncomplete="PF('dialog').hide();" process="@this" 
+                                          update="dialog-escalacao-form, :messages" style="float: right;"
+                                          icon="ui-icon-circle-arrow-w">
+                            <p:resetInput target="dialog-escalacao-form" />
+                        </p:commandButton>
+                    </h:panelGrid>
+                </h:form>
+            </p:dialog>
+
+            <h:form id="form-escalacao">
+                <p:blockUI block="form-escalacao" trigger="btnListar" />
+
+                <p:panelGrid id="panel-cadastro" columns="2" style="width: 100%;">
+                    <f:facet name="header">  
+                        <p:outputLabel value="#{i18n['apostador.escalacao.titulo']}" />
+                    </f:facet> 
+
+                    <p:outputLabel for="dataInicial" value="#{i18n['apostador.escalacao.periodo']}" />
+                    <h:panelGroup>
+                        <p:calendar id="dataInicial" value="#{apostadorEscalacaoControle.filtro.dataInicial}" pattern="dd/MM/yyyy" showOn="button"  />
+
+                        <p:outputLabel for="dataFinal" value="#{i18n['label.ate']}" />
+
+                        <p:calendar id="dataFinal" value="#{apostadorEscalacaoControle.filtro.dataFinal}" pattern="dd/MM/yyyy" showOn="button"  />
+                    </h:panelGroup>
+
+                    <p:outputLabel for="nome" value="#{i18n['apostador.escalacao.nome']}" />
+                    <p:inputText id="nome" value="#{apostadorEscalacaoControle.filtro.nome}" autocomplete="false" />
+
+                    <p:outputLabel for="login" value="#{i18n['apostador.escalacao.selecao']}" />
+                    <p:inputText id="login" value="#{apostadorEscalacaoControle.filtro.nomeSelecao}" autocomplete="false" />
+
+                    <f:facet name="footer">  
+                        <p:commandButton id="btnListar" value="#{i18n['label.listar']}" update="dataTable" action="#{apostadorEscalacaoControle.listar}" icon="ui-icon-search" />
+                       
+                        <p:commandButton id="bntNovo" value="#{i18n['label.novo']}" update=":dialog-escalacao-form, :messages"
+                                         action="#{apostadorEscalacaoControle.preSalvar}" icon="ui-icon-shuffle" oncomplete="handleError(xhr, status, args, 'dialog');" />
+                        
+                        <p:button id="btnVoltar" value="#{i18n['label.voltar']}" outcome="/pages/interno/inicial" icon="ui-icon-circle-arrow-w" />
+                    </f:facet>  
+                </p:panelGrid>
+
+                <br />
+
+                <h:panelGrid  width="100%">
+                    <p:dataTable id="dataTable" var="escalacao" value="#{apostadorEscalacaoControle.entidadeList}"
+                                 paginator="true" rows="4" emptyMessage="#{i18n['msg.nenhum.registro']}" 
+                                 paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                 rowsPerPageTemplate="4,8,12">
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{i18n['apostador.escalacao.nome']}" />
+                            </f:facet>
+                            <h:outputText value="#{escalacao.nome}" />
+                        </p:column>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{i18n['apostador.escalacao.partida']}" />
+                            </f:facet>
+                            <h:outputText value="#{escalacao.partida.descricao}" />
+                        </p:column>
+
+                        <p:column width="4%">
+                            <p:commandButton id="btnAtualizarApostador" update=":dialog-escalacao-form, :messages" 
+                                             action="#{apostadorEscalacaoControle.preAtualizar}" oncomplete="PF('dialog').show();"
+                                             icon="ui-icon-search">
+                                <f:setPropertyActionListener value="#{escalacao}" target="#{apostadorEscalacaoControle.entidade}" />
+                            </p:commandButton>
+                        </p:column>
+                    </p:dataTable>
+                </h:panelGrid>
+            </h:form>
+        </div>
+
+    </ui:define>
+
+</ui:composition>
