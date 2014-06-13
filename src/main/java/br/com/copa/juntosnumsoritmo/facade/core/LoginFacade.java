@@ -18,7 +18,10 @@ public class LoginFacade implements ILoginFacade {
     @Autowired
     private IApostadorFacade apostadorFacade;
 
+<<<<<<< HEAD
     @Override
+=======
+>>>>>>> 25e340a2bfb3a3f2721f9973869767c91b88cf19
     public Apostador verificarUsuario(Apostador usuario) {
         Apostador retorno = null;
 
@@ -47,7 +50,10 @@ public class LoginFacade implements ILoginFacade {
         return retorno;
     }
 
+<<<<<<< HEAD
     @Override
+=======
+>>>>>>> 25e340a2bfb3a3f2721f9973869767c91b88cf19
     public void salvar(Apostador usuario) {
         apostadorFacade.salvar(usuario);
     }

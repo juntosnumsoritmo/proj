@@ -3,11 +3,19 @@ package br.com.copa.juntosnumsoritmo.controller;
 import br.com.copa.juntosnumsoritmo.util.Constantes;
 import br.com.copa.juntosnumsoritmo.facade.IAbstractFacade;
 import br.com.copa.juntosnumsoritmo.model.AbstractDocument;
+<<<<<<< HEAD
+=======
+import java.io.Serializable;
+>>>>>>> 25e340a2bfb3a3f2721f9973869767c91b88cf19
 import java.util.List;
 import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 
+<<<<<<< HEAD
 public abstract class PersistenciaControle<T extends AbstractDocument> extends AbstractControle {
+=======
+public abstract class PersistenciaControle<T extends Serializable> extends AbstractControle {
+>>>>>>> 25e340a2bfb3a3f2721f9973869767c91b88cf19
     
     private static final long serialVersionUID = 7746817840069420235L;
 
@@ -42,8 +50,15 @@ public abstract class PersistenciaControle<T extends AbstractDocument> extends A
     }
     
     public void salvarOuAtualizar() {
+<<<<<<< HEAD
         if (entidade != null) {
             if (entidade.getId() == null) {
+=======
+        if (entidade != null && entidade instanceof AbstractDocument) {
+            final AbstractDocument objeto = (AbstractDocument) entidade;
+            
+            if (objeto.getId() == null) {
+>>>>>>> 25e340a2bfb3a3f2721f9973869767c91b88cf19
                 salvar();
             } else {
                 atualizar();

@@ -6,7 +6,11 @@ import org.springframework.data.annotation.Id;
 public class AbstractDocument implements Serializable {
     
     private static final long serialVersionUID = 1176433638446987549L;
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> 25e340a2bfb3a3f2721f9973869767c91b88cf19
     @Id
     private Long id;
 
@@ -47,10 +51,13 @@ public class AbstractDocument implements Serializable {
         }
         return true;
     }
+<<<<<<< HEAD
 
     @Override
     public String toString() {
         return "{" + "id=" + id + '}';
     }
+=======
+>>>>>>> 25e340a2bfb3a3f2721f9973869767c91b88cf19
     
 }

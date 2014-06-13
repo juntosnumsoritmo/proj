@@ -1,7 +1,10 @@
 package br.com.copa.juntosnumsoritmo.model;
 
 import br.com.copa.juntosnumsoritmo.util.Constantes;
+<<<<<<< HEAD
 import org.springframework.data.mongodb.core.mapping.DBRef;
+=======
+>>>>>>> 25e340a2bfb3a3f2721f9973869767c91b88cf19
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = Constantes.NOME_COLECAO_APOSTADOR)
@@ -15,7 +18,11 @@ public class Apostador extends AbstractDocument {
     private Double valorInicial;
     private Integer pontos;
     private boolean admin;
+<<<<<<< HEAD
     @DBRef(lazy = true) private ApostadorEscalacao escalacao;
+=======
+    private Escalacao escalacao;
+>>>>>>> 25e340a2bfb3a3f2721f9973869767c91b88cf19
 
     public Apostador() {
         super();
@@ -26,7 +33,11 @@ public class Apostador extends AbstractDocument {
     }
 
     public Apostador(Long id, String nome, String login, String senha, 
+<<<<<<< HEAD
             Double valorInicial, Integer pontos, boolean isAdmin, ApostadorEscalacao escalacao) {
+=======
+            Double valorInicial, Integer pontos, boolean isAdmin, Escalacao escalacao) {
+>>>>>>> 25e340a2bfb3a3f2721f9973869767c91b88cf19
         super(id);
         
         this.nome = nome;
@@ -86,11 +97,19 @@ public class Apostador extends AbstractDocument {
         this.admin = isAdmin;
     }
 
+<<<<<<< HEAD
     public ApostadorEscalacao getEscalacao() {
         return escalacao;
     }
 
     public void setEscalacao(ApostadorEscalacao escalacao) {
+=======
+    public Escalacao getEscalacao() {
+        return escalacao;
+    }
+
+    public void setEscalacao(Escalacao escalacao) {
+>>>>>>> 25e340a2bfb3a3f2721f9973869767c91b88cf19
         this.escalacao = escalacao;
     }
 

@@ -12,8 +12,11 @@ import org.springframework.stereotype.Controller;
 @Controller
 @Scope("request")
 public class LoginControle extends AbstractControle {
+<<<<<<< HEAD
     
     private static final long serialVersionUID = -3688210987574830923L;
+=======
+>>>>>>> 25e340a2bfb3a3f2721f9973869767c91b88cf19
 
     private Apostador usuario;
 

@@ -13,8 +13,13 @@ public class Comentario extends AbstractDocument {
 
     private String comentario;
     private Date dataHora;
+<<<<<<< HEAD
     @DBRef(lazy = true) private Apostador apostador;
     @DBRef(lazy = true) private Partida partida;
+=======
+    @DBRef private Apostador apostador;
+    @DBRef private Partida partida;
+>>>>>>> 25e340a2bfb3a3f2721f9973869767c91b88cf19
 
     public Comentario() {
         super();

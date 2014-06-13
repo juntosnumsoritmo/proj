@@ -8,6 +8,10 @@ import java.util.List;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+<<<<<<< HEAD
+=======
+import org.springframework.data.mongodb.core.query.Update;
+>>>>>>> 25e340a2bfb3a3f2721f9973869767c91b88cf19
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -19,6 +23,41 @@ public class AtletaDao extends AbstractDao<Atleta> implements IAtletaDao {
     }
 
     @Override
+<<<<<<< HEAD
+=======
+    public void salvar(Atleta atleta) {
+        atleta.setId(getNextSequenceId().longValue());
+
+        getMongoTemplate().insert(atleta);
+    }
+
+    @Override
+    public void atualizar(Atleta bean) {
+        final Query query = new Query(Criteria.where("id").is(bean.getId()));
+        
+        final Update update = new Update();
+        update.set("nome", bean.getNome());
+        update.set("idade", bean.getIdade());
+        update.set("pais", bean.getPais());
+        update.set("pontuacao", bean.getPontuacao());
+        update.set("posicao", bean.getPosicao());
+        
+        getMongoTemplate().updateFirst(query, update, Atleta.class);
+    }
+
+    @Override
+    public void remover(Atleta bean) {
+        getMongoTemplate().remove(new Query(Criteria.where("id").is(bean.getId())), Atleta.class);
+        
+    }
+
+    @Override
+    public Atleta obter(Atleta filtro) {
+        return getMongoTemplate().findById(filtro.getId(), Atleta.class);
+    }
+
+    @Override
+>>>>>>> 25e340a2bfb3a3f2721f9973869767c91b88cf19
     public List<Atleta> listar(Atleta filtro) {
         final Query query = new Query();
 

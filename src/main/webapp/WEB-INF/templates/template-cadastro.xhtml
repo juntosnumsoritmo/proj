@@ -9,16 +9,25 @@
         <title><h:outputText value="#{i18n['titulo.sistema']}" /></title>
 
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<<<<<<< HEAD
         <meta http-equiv="#{sessionScope['usuario-logado'].admin ? '': 'Refresh'}" content="#{sessionScope['usuario-logado'].admin ? '': '0; URL=../inicial.xhtml'}" />
+=======
+>>>>>>> 25e340a2bfb3a3f2721f9973869767c91b88cf19
 
         <link rel="stylesheet" href="#{request.contextPath}/css/principal.css" type="text/css" media="all" charset="UTF-8" />
 
         <script src="#{request.contextPath}/js/dialog.js" />
+<<<<<<< HEAD
         
         <script src="#{request.contextPath}/js/calendario.js" />
     </h:head>
 
     <h:body rendered="#{sessionScope['usuario-logado'].admin}">
+=======
+    </h:head>
+
+    <h:body>
+>>>>>>> 25e340a2bfb3a3f2721f9973869767c91b88cf19
         <div class="conteudo_cadastro">
             <h:graphicImage value="/images/cadastro.jpg" />
 

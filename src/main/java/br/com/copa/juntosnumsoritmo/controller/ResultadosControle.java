@@ -47,15 +47,24 @@ public class ResultadosControle extends AbstractControle {
             setPartida(new Partida());
         } else {
             setPartida(getPartidaList().get(0));
+<<<<<<< HEAD
 
             visualizarResultados();
         }
     }
 
+=======
+            
+            visualizarResultados();
+        }
+    }
+    
+>>>>>>> 25e340a2bfb3a3f2721f9973869767c91b88cf19
     public void criarComentario() {
         if (StringUtil.isNotBlank(getComentario().getComentario())) {
             getComentario().setApostador(Util.recuperarUsarioLogado());
             getComentario().setPartida(getPartida());
+<<<<<<< HEAD
 
             partidaFacade.criarComentario(getComentario());
 
@@ -66,6 +75,18 @@ public class ResultadosControle extends AbstractControle {
         }
     }
 
+=======
+            
+            partidaFacade.criarComentario(getComentario());
+            
+            setComentario(new Comentario());
+            setComentarioList(partidaFacade.listarComentario(partida));
+            
+            addMessage(Constantes.MSG_COMENTARIO_SUCESSO);
+        }
+    }
+    
+>>>>>>> 25e340a2bfb3a3f2721f9973869767c91b88cf19
     public void visualizarComentarios() {
         setComentario(new Comentario());
         setComentarioList(partidaFacade.listarComentario(partida));
@@ -78,23 +99,35 @@ public class ResultadosControle extends AbstractControle {
     public void visualizarResultados() {
         final List<DesempenhoAtleta> desempenhoAtletaPrimeiraSelecaoList = partidaFacade.listarDesempenhoAtleta(getPartida(), getPartida().getPrimeiraSelecao());
         final List<DesempenhoAtleta> desempenhoAtletaSegundaSelecaoList = partidaFacade.listarDesempenhoAtleta(getPartida(), getPartida().getSegundaSelecao());
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> 25e340a2bfb3a3f2721f9973869767c91b88cf19
         this.partidaPrimeiraSelecaoChart = popularGrafico(desempenhoAtletaPrimeiraSelecaoList);
         this.partidaSegundaSelecaoChart = popularGrafico(desempenhoAtletaSegundaSelecaoList);
     }
 
     private CartesianChartModel popularGrafico(final List<DesempenhoAtleta> desempenhoAtletaList) {
         final BarChartSeries barChartTotal = new BarChartSeries();
+<<<<<<< HEAD
 
         final CartesianChartModel chartModel = new CartesianChartModel();
         chartModel.addSeries(barChartTotal);
 
+=======
+        
+        final CartesianChartModel chartModel = new CartesianChartModel();
+        chartModel.addSeries(barChartTotal);
+        
+>>>>>>> 25e340a2bfb3a3f2721f9973869767c91b88cf19
         DesempenhoAtleta desempenhoAtletaTotal = new DesempenhoAtleta(new Atleta(), new Selecao(), partida);
         LineChartSeries lineChartSeries;
 
         for (DesempenhoAtleta desempenhoAtleta : desempenhoAtletaList) {
             desempenhoAtletaTotal = DesempenhoAtletaEnum.somar(desempenhoAtletaTotal, desempenhoAtleta);
 
+<<<<<<< HEAD
             lineChartSeries = new LineChartSeries(desempenhoAtleta.getAtleta().getNome());
             lineChartSeries.setLabel(desempenhoAtleta.getAtleta().getNome());
 
@@ -127,6 +160,15 @@ public class ResultadosControle extends AbstractControle {
             } else {
                 lineChartSeries.set(getText(Constantes.MSG_DESEMPENHO_ATLETA_CARTAO_VERMELHO), desempenhoAtleta.getNumCartVerm());
             }
+=======
+            lineChartSeries = new LineChartSeries();
+            lineChartSeries.setLabel(desempenhoAtleta.getAtleta().getNome());
+            lineChartSeries.set(getText(Constantes.MSG_DESEMPENHO_ATLETA_GOLS), desempenhoAtleta.getNumGols());
+            lineChartSeries.set(getText(Constantes.MSG_DESEMPENHO_ATLETA_PASSES_CERTOS), desempenhoAtleta.getNumPassesCert());
+            lineChartSeries.set(getText(Constantes.MSG_DESEMPENHO_ATLETA_PASSES_ERRADOS), desempenhoAtleta.getNumPassesErrad());
+            lineChartSeries.set(getText(Constantes.MSG_DESEMPENHO_ATLETA_CARTAO_AMARELO), desempenhoAtleta.getNumCartAmar());
+            lineChartSeries.set(getText(Constantes.MSG_DESEMPENHO_ATLETA_CARTAO_VERMELHO), desempenhoAtleta.getNumCartVerm());
+>>>>>>> 25e340a2bfb3a3f2721f9973869767c91b88cf19
 
             chartModel.addSeries(lineChartSeries);
         }
@@ -137,7 +179,11 @@ public class ResultadosControle extends AbstractControle {
         chartModel.getSeries().get(0).set(getText(Constantes.MSG_DESEMPENHO_ATLETA_PASSES_ERRADOS), desempenhoAtletaTotal.getNumPassesErrad());
         chartModel.getSeries().get(0).set(getText(Constantes.MSG_DESEMPENHO_ATLETA_CARTAO_AMARELO), desempenhoAtletaTotal.getNumCartAmar());
         chartModel.getSeries().get(0).set(getText(Constantes.MSG_DESEMPENHO_ATLETA_CARTAO_VERMELHO), desempenhoAtletaTotal.getNumCartVerm());
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> 25e340a2bfb3a3f2721f9973869767c91b88cf19
         return chartModel;
     }
 
@@ -180,5 +226,9 @@ public class ResultadosControle extends AbstractControle {
     public void setComentarioList(List<Comentario> comentarioList) {
         this.comentarioList = comentarioList;
     }
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> 25e340a2bfb3a3f2721f9973869767c91b88cf19
 }

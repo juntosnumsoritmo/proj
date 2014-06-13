@@ -7,6 +7,22 @@
                 template="/WEB-INF/templates/template-principal.xhtml">
 
     <ui:define name="conteudo">
+<<<<<<< HEAD
+=======
+        <script>
+            function ext() {
+                this.cfg.seriesDefaults = {
+                    pointLabels: {
+                        show: true
+                    },
+                    rendererOptions: {
+                        highlightMouseDown: true
+                    }
+                };
+            }
+        </script>
+
+>>>>>>> 25e340a2bfb3a3f2721f9973869767c91b88cf19
         <div class="conteudo_grafico">
             <p:growl id="messages" />
 
@@ -57,6 +73,7 @@
 
                 <p:panel id="panel-resultado" header="#{i18n['menu.visualizar']}" style="width: 100%;">
                     <h:panelGrid style="width: 100%; text-align: center;">
+<<<<<<< HEAD
                         <p:panelGrid columns="2" style="width: 100%;">
                             <p:outputLabel for="partida" style="float: right" rendered="#{resultadosControle.partida.id != null}" value="#{i18n['desempenho.atleta.partida']}" />
                             <p:selectOneMenu id="partida" value="#{resultadosControle.partida}" converter="selectConverter" rendered="#{resultadosControle.partida.id != null}" style="width: 100%;">
@@ -90,6 +107,40 @@
 
                         <h:outputLabel value="#{i18n['msg.nenhum.registro']}" rendered="#{resultadosControle.partida.id == null}" />
 
+=======
+                        <h:panelGrid columns="2" width="100%" rendered="#{resultadosControle.partida.id != null}">
+                            <p:outputLabel for="partida" style="float: right" value="#{i18n['desempenho.atleta.partida']}" />
+                            <p:selectOneMenu id="partida" value="#{resultadosControle.partida}" converter="selectConverter" style="width: 100%;">
+                                <p:ajax update="@this, grafico, grafico2" listener="#{resultadosControle.visualizarResultador}" />
+                                <f:selectItems value="#{resultadosControle.partidaList}" var="partida" itemValue="#{partida}" itemLabel="#{partida.descricao}"  />
+                            </p:selectOneMenu>
+                        </h:panelGrid>
+
+                        <p:lineChart id="grafico" legendPosition="ne" extender="ext" shadow="true" 
+                                     zoom="true" legendRows="5" legendCols="2"
+                                     rendered="#{resultadosControle.partida.id != null}"
+                                     value="#{resultadosControle.partidaPrimeiraSelecaoChart}" style="background-color: wheat;"
+                                     title="#{i18n['desempenho.atleta.titulo']}: #{resultadosControle.partida.primeiraSelecao.nome}"
+                                     animate="false" datatipFormat="%2$d" />
+
+                        <p:lineChart id="grafico2" legendPosition="ne" extender="ext" shadow="true" 
+                                     zoom="true" legendRows="5" legendCols="2"
+                                     rendered="#{resultadosControle.partida.id != null}"
+                                     value="#{resultadosControle.partidaSegundaSelecaoChart}" style="background-color: wheat;"
+                                     title="#{i18n['desempenho.atleta.titulo']}: #{resultadosControle.partida.segundaSelecao.nome}"
+                                     animate="false" datatipFormat="%2$d" />
+                        
+                        <h:outputLabel value="#{i18n['msg.nenhum.registro']}" rendered="#{resultadosControle.partida.id == null}" />
+
+                        <f:facet name="footer">  
+                            <p:button id="btnVoltar" style="float: right;" value="#{i18n['label.voltar']}" outcome="/pages/interno/inicial" icon="ui-icon-circle-arrow-w" />
+
+                            <p:commandButton id="bntComentario" value="#{i18n['partida.comentarios']}" 
+                                             rendered="#{resultadosControle.partida.id != null}"
+                                             update=":dialog-comentario-form, :messages" style="float: right"
+                                             action="#{resultadosControle.visualizarComentarios}" icon="ui-icon-comment" oncomplete="PF('dialog').show();" />
+                        </f:facet> 
+>>>>>>> 25e340a2bfb3a3f2721f9973869767c91b88cf19
                     </h:panelGrid>
                 </p:panel>
             </h:form>

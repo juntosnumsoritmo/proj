@@ -12,7 +12,10 @@ public class Constantes {
     public static final String NOME_COLECAO_PARTIDA = "partida";
     public static final String NOME_COLECAO_DESEMPENHO_ATLETA = "desempenho_atleta";
     public static final String NOME_COLECAO_COMENTARIO = "comentario";
+<<<<<<< HEAD
     public static final String NOME_COLECAO_APOSTADOR_ESCALACAO = "apostador_escalacao";
+=======
+>>>>>>> 25e340a2bfb3a3f2721f9973869767c91b88cf19
 
     public static final String USUARIO_LOGADO = "usuario-logado";
 
@@ -20,11 +23,16 @@ public class Constantes {
     public static final String PAGINA_INICIAL = "/pages/interno/inicial.xhtml";
 
     public static final int EMPTY = 0;
+<<<<<<< HEAD
     public static final int MAXIMO_ATLETA_SELECAO = 11;
     public static final String SEPARADOR_PLACAR = " X ";
     public static final String SEPARADOR = " - ";
     
     public static final String MSG_PERIODO_INVALIDO = "msg.periodo.invalido";
+=======
+    public static final String SEPARADOR_PLACAR = " X ";
+    public static final String SEPARADOR = " - ";
+>>>>>>> 25e340a2bfb3a3f2721f9973869767c91b88cf19
 
     public static final String MSG_USUARIO_INVALIDO = "msg.usuario.invalido";
     public static final String MSG_ERRO_REGRA_NEGOCIO = "msg.erro.regra.negocio";
@@ -46,7 +54,10 @@ public class Constantes {
     public static final String MSG_PARTIDA_SEM_SELECAO = "msg.partida.sem.selecao";
     public static final String MSG_PARTIDA_SELECOES_IGUAIS = "msg.partida.selecoes.iguais";
     public static final String MSG_PARTIDA_PLACAR_SUCESSO = "msg.partida.placar.sucesso";
+<<<<<<< HEAD
     public static final String MSG_SELECAO_ATLETAS_EXCEDIDO = "msg.partida.atleta.excedido";
+=======
+>>>>>>> 25e340a2bfb3a3f2721f9973869767c91b88cf19
 
     public static final String MSG_DESEMPENHO_ATLETA_TITULO = "desempenho.atleta.titulo";
     public static final String MSG_DESEMPENHO_ATLETA_TOTAL = "desempenho.atleta.total";
@@ -64,6 +75,7 @@ public class Constantes {
     public static final String MSG_DESEMPENHO_ATLETA_FALHA_DEFESA = "desempenho.atleta.falha.defesa";
     
     public static final String MSG_COMENTARIO_SUCESSO = "msg.comentario.sucesso";
+<<<<<<< HEAD
     
     public static final String MSG_APOSTADOR_ESCALACAO_NOME_VAZIO = "msg.apostador.escalacao.nome.vazio";
     public static final String MSG_APOSTADOR_ESCALACAO_PARTIDA_VAZIA = "msg.apostador.escalacao.partida.vazia";
@@ -76,5 +88,7 @@ public class Constantes {
     
     public static final String LABEL_PONTUACAO_OFICIAL = "pontuacao.selecao.oficial";
     public static final String LABEL_PONTUACAO_APOSTADOR = "pontuacao.selecao.apostador";
+=======
+>>>>>>> 25e340a2bfb3a3f2721f9973869767c91b88cf19
 
 }

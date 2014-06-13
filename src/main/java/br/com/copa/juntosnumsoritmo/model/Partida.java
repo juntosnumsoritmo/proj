@@ -1,7 +1,10 @@
 package br.com.copa.juntosnumsoritmo.model;
 
 import br.com.copa.juntosnumsoritmo.util.Constantes;
+<<<<<<< HEAD
 import br.com.copa.juntosnumsoritmo.util.StringUtil;
+=======
+>>>>>>> 25e340a2bfb3a3f2721f9973869767c91b88cf19
 import br.com.copa.juntosnumsoritmo.util.Util;
 import java.util.Date;
 import java.util.HashSet;
@@ -150,11 +153,16 @@ public class Partida extends AbstractDocument {
             retorno.append(getPrimeiraSelecao().getNome());
             retorno.append(Constantes.SEPARADOR_PLACAR);
             retorno.append(getSegundaSelecao().getNome());
+<<<<<<< HEAD
 
             if (StringUtil.isNotBlank(getPlacar())) {
                 retorno.append(Constantes.SEPARADOR);
                 retorno.append(getPlacar());
             }
+=======
+            retorno.append(Constantes.SEPARADOR);
+            retorno.append(getPlacar());
+>>>>>>> 25e340a2bfb3a3f2721f9973869767c91b88cf19
         }
 
         return retorno.toString();

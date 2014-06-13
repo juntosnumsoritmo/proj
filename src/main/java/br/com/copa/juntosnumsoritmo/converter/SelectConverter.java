@@ -12,7 +12,10 @@ import javax.faces.convert.FacesConverter;
 @FacesConverter(value = "selectConverter")
 public class SelectConverter implements Converter {
 
+<<<<<<< HEAD
     @Override
+=======
+>>>>>>> 25e340a2bfb3a3f2721f9973869767c91b88cf19
     public Object getAsObject(FacesContext fc, UIComponent uic, String value) {
         Object retorno = null;
 
@@ -56,7 +59,10 @@ public class SelectConverter implements Converter {
         return retorno;
     }
 
+<<<<<<< HEAD
     @Override
+=======
+>>>>>>> 25e340a2bfb3a3f2721f9973869767c91b88cf19
     public String getAsString(FacesContext fc, UIComponent uic, Object obj) {
         String retorno = "";
 

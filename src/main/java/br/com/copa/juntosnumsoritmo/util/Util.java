@@ -1,5 +1,6 @@
 package br.com.copa.juntosnumsoritmo.util;
 
+<<<<<<< HEAD
 import br.com.copa.juntosnumsoritmo.model.AbstractDocument;
 import br.com.copa.juntosnumsoritmo.model.Apostador;
 import java.text.DateFormat;
@@ -8,6 +9,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collection;
+=======
+import br.com.copa.juntosnumsoritmo.model.Apostador;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+>>>>>>> 25e340a2bfb3a3f2721f9973869767c91b88cf19
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -17,7 +23,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 public class Util {
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> 25e340a2bfb3a3f2721f9973869767c91b88cf19
     private static final DateFormat DATE_FORMAT = new SimpleDateFormat(Constantes.PATTERN_DATA_BRASIL);
     private static final DateFormat DATE_TIME_FORMAT = new SimpleDateFormat(Constantes.PATTERN_DATA_HORA_BRASIL);
 
@@ -83,13 +93,21 @@ public class Util {
 
         if (list != null && list.size() >= 1) {
             final Integer index = list.size() == 1 ? 0 : gerarValor(list.size() - 1);
+<<<<<<< HEAD
 
+=======
+            
+>>>>>>> 25e340a2bfb3a3f2721f9973869767c91b88cf19
             retorno = list.get(index);
         }
 
         return retorno;
     }
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> 25e340a2bfb3a3f2721f9973869767c91b88cf19
     public static Integer gerarValor(Integer limite) {
         double retorno = 0d;
 
@@ -99,6 +117,7 @@ public class Util {
 
         return (int) retorno;
     }
+<<<<<<< HEAD
 
     public static String formatarData(Date data) {
         return data == null ? "" : DATE_FORMAT.format(data);
@@ -197,4 +216,15 @@ public class Util {
         return calendar.getTime();
     }
 
+=======
+    
+    public static String formatarData(Date data) {
+        return data == null ? "" : DATE_FORMAT.format(data);
+    }
+    
+    public static String formatarDataHora(Date data) {
+        return data == null ? "" : DATE_TIME_FORMAT.format(data);
+    }
+    
+>>>>>>> 25e340a2bfb3a3f2721f9973869767c91b88cf19
 }

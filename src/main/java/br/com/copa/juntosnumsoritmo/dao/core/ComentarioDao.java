@@ -19,6 +19,31 @@ public class ComentarioDao extends AbstractDao<Comentario> implements IComentari
     }
 
     @Override
+<<<<<<< HEAD
+=======
+    public void salvar(Comentario bean) {
+        bean.setId(getNextSequenceId().longValue());
+
+        getMongoTemplate().insert(bean);
+    }
+
+    @Override
+    public void atualizar(Comentario bean) {
+        getMongoTemplate().save(bean);
+    }
+
+    @Override
+    public void remover(Comentario bean) {
+        getMongoTemplate().remove(bean);
+    }
+
+    @Override
+    public Comentario obter(Comentario filtro) {
+        return getMongoTemplate().findById(filtro.getId(), Comentario.class);
+    }
+
+    @Override
+>>>>>>> 25e340a2bfb3a3f2721f9973869767c91b88cf19
     public List<Comentario> listar(Comentario filtro) {
         final Query query = new Query();
 

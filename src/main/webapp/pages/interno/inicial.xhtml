@@ -11,11 +11,16 @@
                 <p:panel header="#{i18n['titulo.bem.vindo']}: #{sessionScope['usuario-logado'].nome}" style="width: 100%;">
                     <h:panelGrid columns="2" columnClasses="topo" style="width: 100%; text-align: center;">
                         <p:menu style="padding: 0; width: 100%;">
+<<<<<<< HEAD
                             <p:submenu label="#{i18n['menu.titulo.cadastro']}" rendered="#{sessionScope['usuario-logado'].admin}">
+=======
+                            <p:submenu label="#{i18n['menu.titulo.cadastro']}">
+>>>>>>> 25e340a2bfb3a3f2721f9973869767c91b88cf19
                                 <p:menuitem id="linkApostadores" value="#{i18n['menu.apostador']}" outcome="admin/apostador" icon="ui-icon-person" />
                                 <p:menuitem id="linkAtletas" value="#{i18n['menu.atleta']}" outcome="admin/atleta" icon="ui-icon-person" />
                                 <p:menuitem id="linkSelecao" value="#{i18n['menu.selecao']}" outcome="admin/selecao" icon="ui-icon-star" />
                                 <p:menuitem id="linkPartida" value="#{i18n['menu.partida']}" outcome="admin/partida" icon="ui-icon-tag" />
+<<<<<<< HEAD
                                 <p:separator />
                             </p:submenu>
 
@@ -26,6 +31,18 @@
                                 <p:separator />
                             </p:submenu>
 
+=======
+                            </p:submenu>
+
+                            <p:separator />
+
+                            <p:submenu label="#{i18n['menu.titulo.resultados']}">
+                                <p:menuitem id="linkVisualizarResultados" value="#{i18n['menu.visualizar']}" outcome="resultado/visualizar" icon="ui-icon-clipboard"  />
+                            </p:submenu>
+
+                            <p:separator />
+
+>>>>>>> 25e340a2bfb3a3f2721f9973869767c91b88cf19
                             <p:menuitem id="linkSair" value="#{i18n['menu.sair']}" action="#{loginControle.sair}" icon="ui-icon-close" />
                         </p:menu>
 

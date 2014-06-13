@@ -18,7 +18,11 @@ public class Selecao extends AbstractDocument {
     @Transient
     private String nomeAtleta;
 
+<<<<<<< HEAD
     @DBRef(lazy = true) @Field(value = "atletas")
+=======
+    @DBRef @Field(value = "atletas")
+>>>>>>> 25e340a2bfb3a3f2721f9973869767c91b88cf19
     private Set<Atleta> atletaList;
 
     public Selecao() {

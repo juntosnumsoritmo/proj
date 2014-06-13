@@ -11,8 +11,13 @@ public enum DesempenhoAtletaEnum {
     GOL_CONTRA(0),
     FALTAS_COMETIDAS(1),
     FALTAS_RECEBIDAS(3),
+<<<<<<< HEAD
     CARTAO_AMARELO(2),
     CARTAO_VERMELHO(2),
+=======
+    CARTAO_AMARELO(1),
+    CARTAO_VERMELHO(1),
+>>>>>>> 25e340a2bfb3a3f2721f9973869767c91b88cf19
     PASSES_CERTOS(10),
     PASSES_ERRADOS(8),
     GOLEIRO_GOL_SOFRIDO(1),
@@ -136,6 +141,7 @@ public enum DesempenhoAtletaEnum {
             final List<Atleta> atletaPrimeiraSelecaoList = new ArrayList<Atleta>(partida.getPrimeiraSelecao().getAtletaList());
             final List<Atleta> atletaSegundaSelecaoList = new ArrayList<Atleta>(partida.getSegundaSelecao().getAtletaList());
             DesempenhoAtleta desempenhoAtleta = null;
+<<<<<<< HEAD
             Atleta atleta = null;
             int gols = 0;
             
@@ -151,11 +157,30 @@ public enum DesempenhoAtletaEnum {
                         gols--;
                     }
                 } else if (gols > partida.getPlacarPrimeiraSelecao() && i+1 == atletaPrimeiraSelecaoList.size()) {
+=======
+            int gols = 0;
+
+            for (Atleta atleta : atletaPrimeiraSelecaoList) {
+                desempenhoAtleta = createDesempenhoAtleta(atleta, partida.getPrimeiraSelecao(), partida);
+
+                gols += desempenhoAtleta.getNumGols();
+
+                if (desempenhoAtleta.getNumGols() > partida.getPlacarPrimeiraSelecao()) {
+                    while (desempenhoAtleta.getNumGols() > partida.getPlacarPrimeiraSelecao()) {
+                        desempenhoAtleta.setNumGols(desempenhoAtleta.getNumGols() - 1);
+                        gols--;
+                    }
+                } else if (gols > partida.getPlacarPrimeiraSelecao() && atletaPrimeiraSelecaoList.indexOf(atleta) == atletaPrimeiraSelecaoList.size() - 1) {
+>>>>>>> 25e340a2bfb3a3f2721f9973869767c91b88cf19
                     while (gols > partida.getPlacarPrimeiraSelecao()) {
                         desempenhoAtleta.setNumGols(desempenhoAtleta.getNumGols() - 1);
                         gols--;
                     }
+<<<<<<< HEAD
                 } else if (gols < partida.getPlacarPrimeiraSelecao() && i+1 == atletaPrimeiraSelecaoList.size()) {
+=======
+                } else if (gols < partida.getPlacarPrimeiraSelecao() && atletaPrimeiraSelecaoList.indexOf(atleta) == atletaPrimeiraSelecaoList.size() - 1) {
+>>>>>>> 25e340a2bfb3a3f2721f9973869767c91b88cf19
                     while (gols < partida.getPlacarPrimeiraSelecao()) {
                         desempenhoAtleta.setNumGols(desempenhoAtleta.getNumGols() + 1);
                         gols++;
@@ -167,23 +192,40 @@ public enum DesempenhoAtletaEnum {
 
             gols = 0;
 
+<<<<<<< HEAD
             for (int i = 0; i < atletaSegundaSelecaoList.size(); i++) {
                 atleta = atletaSegundaSelecaoList.get(i);
+=======
+            for (Atleta atleta : atletaSegundaSelecaoList) {
+>>>>>>> 25e340a2bfb3a3f2721f9973869767c91b88cf19
                 desempenhoAtleta = createDesempenhoAtleta(atleta, partida.getSegundaSelecao(), partida);
 
                 gols += desempenhoAtleta.getNumGols();
 
+<<<<<<< HEAD
                 if (gols > partida.getPlacarSegundaSelecao()) {
                     while (gols > partida.getPlacarSegundaSelecao()) {
                         desempenhoAtleta.setNumGols(desempenhoAtleta.getNumGols() - 1);
                         gols--;
                     }
                 } else if (gols > partida.getPlacarSegundaSelecao() && i+1 == atletaSegundaSelecaoList.size()) {
+=======
+                if (desempenhoAtleta.getNumGols() > partida.getPlacarSegundaSelecao()) {
+                    while (desempenhoAtleta.getNumGols() > partida.getPlacarSegundaSelecao()) {
+                        desempenhoAtleta.setNumGols(desempenhoAtleta.getNumGols() - 1);
+                        gols--;
+                    }
+                } else if (gols > partida.getPlacarSegundaSelecao() && atletaSegundaSelecaoList.indexOf(atleta) == atletaSegundaSelecaoList.size() - 1) {
+>>>>>>> 25e340a2bfb3a3f2721f9973869767c91b88cf19
                     while (gols > partida.getPlacarSegundaSelecao()) {
                         desempenhoAtleta.setNumGols(desempenhoAtleta.getNumGols() - 1);
                         gols--;
                     }
+<<<<<<< HEAD
                 } else if (gols < partida.getPlacarSegundaSelecao() && i+1 == atletaSegundaSelecaoList.size()) {
+=======
+                } else if (gols < partida.getPlacarSegundaSelecao() && atletaSegundaSelecaoList.indexOf(atleta) == atletaSegundaSelecaoList.size() - 1) {
+>>>>>>> 25e340a2bfb3a3f2721f9973869767c91b88cf19
                     while (gols < partida.getPlacarSegundaSelecao()) {
                         desempenhoAtleta.setNumGols(desempenhoAtleta.getNumGols() + 1);
                         gols++;

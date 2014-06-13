@@ -2,9 +2,13 @@ package br.com.copa.juntosnumsoritmo.dao.core;
 
 import br.com.copa.juntosnumsoritmo.dao.IDesempenhoAtletaDao;
 import br.com.copa.juntosnumsoritmo.model.DesempenhoAtleta;
+<<<<<<< HEAD
 import br.com.copa.juntosnumsoritmo.model.Partida;
 import br.com.copa.juntosnumsoritmo.util.Constantes;
 import br.com.copa.juntosnumsoritmo.util.Util;
+=======
+import br.com.copa.juntosnumsoritmo.util.Constantes;
+>>>>>>> 25e340a2bfb3a3f2721f9973869767c91b88cf19
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -20,6 +24,31 @@ public class DesempenhoAtletaDao extends AbstractDao<DesempenhoAtleta> implement
     }
 
     @Override
+<<<<<<< HEAD
+=======
+    public void salvar(DesempenhoAtleta bean) {
+        bean.setId(getNextSequenceId().longValue());
+
+        getMongoTemplate().insert(bean);
+    }
+
+    @Override
+    public void atualizar(DesempenhoAtleta bean) {
+        getMongoTemplate().save(bean);
+    }
+
+    @Override
+    public void remover(DesempenhoAtleta bean) {
+        getMongoTemplate().remove(bean);
+    }
+
+    @Override
+    public DesempenhoAtleta obter(DesempenhoAtleta filtro) {
+        return getMongoTemplate().findById(filtro.getId(), DesempenhoAtleta.class);
+    }
+
+    @Override
+>>>>>>> 25e340a2bfb3a3f2721f9973869767c91b88cf19
     public List<DesempenhoAtleta> listar(DesempenhoAtleta filtro) {
         final List<DesempenhoAtleta> retorno = new ArrayList<DesempenhoAtleta>(Constantes.EMPTY);
         final boolean hasAtleta = filtro.getAtleta() != null && filtro.getAtleta().getId() != null;
@@ -46,6 +75,7 @@ public class DesempenhoAtletaDao extends AbstractDao<DesempenhoAtleta> implement
         return retorno;
     }
 
+<<<<<<< HEAD
     @Override
     public List<DesempenhoAtleta> listar(Partida... partidaList) {
         final List<DesempenhoAtleta> desempenhoAtletaList = new ArrayList<DesempenhoAtleta>(Constantes.EMPTY);
@@ -61,4 +91,6 @@ public class DesempenhoAtletaDao extends AbstractDao<DesempenhoAtleta> implement
         return desempenhoAtletaList;
     }
 
+=======
+>>>>>>> 25e340a2bfb3a3f2721f9973869767c91b88cf19
 }

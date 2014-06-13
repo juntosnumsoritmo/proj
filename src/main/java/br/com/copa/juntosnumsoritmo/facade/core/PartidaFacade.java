@@ -1,18 +1,25 @@
 package br.com.copa.juntosnumsoritmo.facade.core;
 
+<<<<<<< HEAD
 import br.com.copa.juntosnumsoritmo.dao.IApostadorEscalacaoDao;
+=======
+>>>>>>> 25e340a2bfb3a3f2721f9973869767c91b88cf19
 import br.com.copa.juntosnumsoritmo.dao.IComentarioDao;
 import br.com.copa.juntosnumsoritmo.dao.IDesempenhoAtletaDao;
 import br.com.copa.juntosnumsoritmo.dao.ISelecaoDao;
 import br.com.copa.juntosnumsoritmo.exception.ValidacaoException;
 import br.com.copa.juntosnumsoritmo.facade.IPartidaFacade;
+<<<<<<< HEAD
 import br.com.copa.juntosnumsoritmo.model.Apostador;
 import br.com.copa.juntosnumsoritmo.model.ApostadorEscalacao;
 import br.com.copa.juntosnumsoritmo.model.Atleta;
+=======
+>>>>>>> 25e340a2bfb3a3f2721f9973869767c91b88cf19
 import br.com.copa.juntosnumsoritmo.model.Comentario;
 import br.com.copa.juntosnumsoritmo.model.DesempenhoAtleta;
 import br.com.copa.juntosnumsoritmo.model.DesempenhoAtletaEnum;
 import br.com.copa.juntosnumsoritmo.model.Partida;
+<<<<<<< HEAD
 import br.com.copa.juntosnumsoritmo.model.PontuacaoEnum;
 import br.com.copa.juntosnumsoritmo.model.Ranking;
 import br.com.copa.juntosnumsoritmo.model.Selecao;
@@ -29,6 +36,17 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+=======
+import br.com.copa.juntosnumsoritmo.model.Selecao;
+import br.com.copa.juntosnumsoritmo.util.Constantes;
+import br.com.copa.juntosnumsoritmo.util.StringUtil;
+import br.com.copa.juntosnumsoritmo.validador.Mensagem;
+import br.com.copa.juntosnumsoritmo.validador.ValidadorMessage;
+import java.util.Collections;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+>>>>>>> 25e340a2bfb3a3f2721f9973869767c91b88cf19
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -44,10 +62,29 @@ public class PartidaFacade extends AbstractFacade<Partida> implements IPartidaFa
     @Autowired
     private IComentarioDao comentarioDao;
 
+<<<<<<< HEAD
     @Autowired
     private IApostadorEscalacaoDao apostadorEscalacaoDao;
 
     @Override
+=======
+    public void salvar(Partida bean) {
+        validar(bean);
+
+        getDao().salvar(bean);
+    }
+
+    public void atualizar(Partida bean) {
+        validar(bean);
+
+        getDao().atualizar(bean);
+    }
+
+    public void remover(Partida bean) {
+        getDao().remover(bean);
+    }
+
+>>>>>>> 25e340a2bfb3a3f2721f9973869767c91b88cf19
     public void validar(Partida bean) {
         final ValidadorMessage validadorMessage = new ValidadorMessage();
 
@@ -66,7 +103,14 @@ public class PartidaFacade extends AbstractFacade<Partida> implements IPartidaFa
         }
     }
 
+<<<<<<< HEAD
     @Override
+=======
+    public Partida obter(Partida filtro) {
+        return getDao().obter(filtro);
+    }
+
+>>>>>>> 25e340a2bfb3a3f2721f9973869767c91b88cf19
     public List<Partida> listar(Partida filtro) {
         if (StringUtil.isBlank(filtro.getNomeSelecao())) {
             filtro.setSelecaoList(new HashSet<Selecao>(Constantes.EMPTY));
@@ -76,6 +120,7 @@ public class PartidaFacade extends AbstractFacade<Partida> implements IPartidaFa
             filtro.setSelecaoList(new HashSet<Selecao>(selecaoList));
         }
 
+<<<<<<< HEAD
         filtro.setDataInicial(Util.configurarPeriodoInicial(filtro.getDataInicial()));
         filtro.setDataFinal(Util.configurarPeriodoFinal(filtro.getDataFinal()));
 
@@ -83,11 +128,19 @@ public class PartidaFacade extends AbstractFacade<Partida> implements IPartidaFa
     }
 
     @Override
+=======
+        return getDao().listar(filtro);
+    }
+
+>>>>>>> 25e340a2bfb3a3f2721f9973869767c91b88cf19
     public List<Selecao> listarSelecao() {
         return selecaoDao.listar(new Selecao());
     }
 
+<<<<<<< HEAD
     @Override
+=======
+>>>>>>> 25e340a2bfb3a3f2721f9973869767c91b88cf19
     public Partida gerarResultado(Partida partida) {
         partida = obter(partida);
 
@@ -105,16 +158,23 @@ public class PartidaFacade extends AbstractFacade<Partida> implements IPartidaFa
         return partida;
     }
 
+<<<<<<< HEAD
     @Override
+=======
+>>>>>>> 25e340a2bfb3a3f2721f9973869767c91b88cf19
     public List<DesempenhoAtleta> listarDesempenhoAtleta(Partida partida, Selecao selecao) {
         return desempenhoAtletaDao.listar(new DesempenhoAtleta(null, selecao, partida));
     }
 
+<<<<<<< HEAD
     @Override
+=======
+>>>>>>> 25e340a2bfb3a3f2721f9973869767c91b88cf19
     public void criarComentario(Comentario comentario) {
         final boolean hasComentario = StringUtil.isNotBlank(comentario.getComentario());
         final boolean hasPartida = comentario.getPartida() != null && comentario.getPartida().getId() != null;
         final boolean hasApostador = comentario.getApostador() != null && comentario.getApostador().getId() != null;
+<<<<<<< HEAD
 
         if (hasComentario && hasPartida && hasApostador) {
             comentario.setDataHora(new Date());
@@ -125,10 +185,22 @@ public class PartidaFacade extends AbstractFacade<Partida> implements IPartidaFa
     }
 
     @Override
+=======
+        
+        if (hasComentario && hasPartida && hasApostador) {
+            comentario.setDataHora(new Date());
+            comentario.setComentario(comentario.getComentario().trim());
+            
+            comentarioDao.salvar(comentario);
+        }
+    }
+    
+>>>>>>> 25e340a2bfb3a3f2721f9973869767c91b88cf19
     public List<Comentario> listarComentario(Partida partida) {
         return comentarioDao.listar(new Comentario(null, null, partida));
     }
 
+<<<<<<< HEAD
     @Override
     public List<DesempenhoAtleta> listarDesempenhoAtleta(Partida partida) {
         partida.setDataInicial(Util.configurarPeriodoInicial(partida.getDataInicial()));
@@ -230,4 +302,6 @@ public class PartidaFacade extends AbstractFacade<Partida> implements IPartidaFa
         return rankingMap;
     }
 
+=======
+>>>>>>> 25e340a2bfb3a3f2721f9973869767c91b88cf19
 }

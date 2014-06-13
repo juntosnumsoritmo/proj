@@ -2,6 +2,11 @@ package br.com.copa.juntosnumsoritmo.facade.core;
 
 import static br.com.copa.juntosnumsoritmo.util.StringUtil.isBlank;
 
+<<<<<<< HEAD
+=======
+import java.util.List;
+
+>>>>>>> 25e340a2bfb3a3f2721f9973869767c91b88cf19
 import org.springframework.stereotype.Service;
 
 import br.com.copa.juntosnumsoritmo.dao.IApostadorDao;
@@ -16,7 +21,10 @@ import br.com.copa.juntosnumsoritmo.validador.ValidadorMessage;
 @Service
 public class ApostadorFacade extends AbstractFacade<Apostador> implements IApostadorFacade {
 
+<<<<<<< HEAD
     @Override
+=======
+>>>>>>> 25e340a2bfb3a3f2721f9973869767c91b88cf19
     public void salvar(Apostador bean) {
         validar(bean);
 
@@ -29,7 +37,10 @@ public class ApostadorFacade extends AbstractFacade<Apostador> implements IApost
         getDao().salvar(trim(bean));
     }
 
+<<<<<<< HEAD
     @Override
+=======
+>>>>>>> 25e340a2bfb3a3f2721f9973869767c91b88cf19
     public void atualizar(Apostador bean) {
         validar(bean);
 
@@ -42,7 +53,22 @@ public class ApostadorFacade extends AbstractFacade<Apostador> implements IApost
         getDao().atualizar(trim(bean));
     }
 
+<<<<<<< HEAD
     @Override
+=======
+    public void remover(Apostador bean) {
+        getDao().remover(bean);
+    }
+
+    public Apostador obter(Apostador filtro) {
+        return getDao().obter(filtro);
+    }
+
+    public List<Apostador> listar(Apostador filtro) {
+        return getDao().listar(filtro);
+    }
+
+>>>>>>> 25e340a2bfb3a3f2721f9973869767c91b88cf19
     public void validar(Apostador apostador) {
         final ValidadorMessage errosValidacao = new ValidadorMessage();
 
@@ -70,7 +96,10 @@ public class ApostadorFacade extends AbstractFacade<Apostador> implements IApost
         return apostador;
     }
 
+<<<<<<< HEAD
     @Override
+=======
+>>>>>>> 25e340a2bfb3a3f2721f9973869767c91b88cf19
     public Apostador verificarLoginUsuario(Apostador usuario) {
         return getApostadorDao().verificarLoginUsuario(usuario);
     }

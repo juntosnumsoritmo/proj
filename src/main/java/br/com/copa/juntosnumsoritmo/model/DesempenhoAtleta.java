@@ -22,6 +22,7 @@ public class DesempenhoAtleta extends AbstractDocument {
     private Integer goleiroDefPenalti;
     private Integer goleiroFalhaDef;
 
+<<<<<<< HEAD
     @DBRef(lazy = false)
     private Atleta atleta;
 
@@ -29,6 +30,15 @@ public class DesempenhoAtleta extends AbstractDocument {
     private Partida partida;
 
     @DBRef(lazy = false)
+=======
+    @DBRef
+    private Atleta atleta;
+
+    @DBRef
+    private Partida partida;
+
+    @DBRef
+>>>>>>> 25e340a2bfb3a3f2721f9973869767c91b88cf19
     private Selecao selecao;
 
     public DesempenhoAtleta() {
